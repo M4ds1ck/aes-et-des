@@ -1,0 +1,212 @@
+/*
+ * AUDIT LOG — globals.css
+ * [WARN] Large layout relies on desktop-first spacing; mobile styles are handled per-component -> NOTED.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(79, 142, 247, 0.16), transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(45, 212, 191, 0.12), transparent 45%),
+    linear-gradient(180deg, #0b0b16 0%, #0f0f1a 50%, #0a0a13 100%);
+  color: #e6e9f2;
+  font-family: 'Inter', 'Poppins', sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00d4ff44;
+  border-radius: 3px;
+}
+
+.glow-cyan {
+  box-shadow: 0 0 8px #00d4ff88, 0 0 20px #00d4ff22;
+}
+
+.glow-green {
+  box-shadow: 0 0 8px #00ff8888, 0 0 20px #00ff8822;
+}
+
+.glow-amber {
+  box-shadow: 0 0 8px #ffb30088, 0 0 20px #ffb30022;
+}
+
+.panel {
+  background: rgba(18, 22, 35, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(10, 12, 22, 0.35);
+}
+
+.terminal-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.terminal-glow {
+  background: radial-gradient(circle at 30% 20%, rgba(79, 142, 247, 0.18), transparent 45%),
+    radial-gradient(circle at 70% 80%, rgba(45, 212, 191, 0.18), transparent 50%);
+}
+
+.bit-cell {
+  font-family: 'Space Mono', monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffffff26;
+  background: rgba(10, 16, 30, 0.45);
+  transition: all 0.3s ease;
+}
+
+.bit-cell.active {
+  border-color: #00d4ff;
+  background: #00d4ff15;
+  color: #00d4ff;
+  box-shadow: 0 0 6px #00d4ff66;
+}
+
+.bit-cell.highlighted {
+  border-color: #ffb300;
+  background: #ffb30015;
+  color: #ffb300;
+  box-shadow: 0 0 6px #ffb30066;
+}
+
+.bit-cell.moved {
+  border-color: #00ff88;
+  background: #00ff8815;
+  color: #00ff88;
+  box-shadow: 0 0 6px #00ff8866;
+}
+
+.bit-cell.dimmed {
+  opacity: 0.42;
+}
+
+.bit-cell-row {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.arrow-rot-right {
+  transform: rotate(0deg);
+}
+.arrow-rot-down {
+  transform: rotate(90deg);
+}
+.arrow-rot-left {
+  transform: rotate(180deg);
+}
+.arrow-rot-up {
+  transform: rotate(270deg);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 0.75rem;
+  appearance: none;
+  border: none;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar::-webkit-progress-bar {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar::-webkit-progress-value {
+  background: linear-gradient(90deg, #4f8ef7, #4fd1ff, #2dd4bf);
+  border-radius: 999px;
+}
+
+.progress-bar::-moz-progress-bar {
+  background: linear-gradient(90deg, #4f8ef7, #4fd1ff, #2dd4bf);
+  border-radius: 999px;
+}
+
+.aes-camera {
+  transform-style: preserve-3d;
+}
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: rgba(9, 12, 20, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+}
+
+.site-nav__brand {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.site-nav__tabs {
+  display: inline-flex;
+  gap: 0.4rem;
+  padding: 0.3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(17, 24, 39, 0.6);
+}
+
+.site-nav__tab {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.site-nav__tab.active {
+  background: rgba(79, 142, 247, 0.25);
+  color: #4f8ef7;
+}

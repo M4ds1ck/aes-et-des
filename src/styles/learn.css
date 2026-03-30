@@ -1,0 +1,471 @@
+/*
+ * AUDIT LOG — learn.css
+ * [WARN] Slide visuals are CSS-based; ensure container handles small screens -> NOTED.
+ */
+.learn-page {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.learn-page__header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.learn-page__eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.learn-page__title {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #ffffff;
+  margin: 0.3rem 0;
+}
+
+.learn-page__subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 42rem;
+}
+
+.learn-page__tabs {
+  display: inline-flex;
+  gap: 0.5rem;
+  padding: 0.3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(17, 24, 39, 0.6);
+}
+
+.learn-tab {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.learn-tab--active {
+  background: rgba(79, 142, 247, 0.25);
+  color: #4f8ef7;
+}
+
+.learn-deck {
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(18, 24, 38, 0.75);
+  backdrop-filter: blur(16px);
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px rgba(8, 12, 20, 0.35);
+  display: grid;
+  gap: 1.25rem;
+}
+
+.learn-deck__header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.learn-deck__title {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.learn-deck__subtitle {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.learn-deck__progress {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.learn-slide {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.learn-slide__visual {
+  min-height: 220px;
+  display: grid;
+  place-items: stretch;
+  width: 100%;
+}
+
+.learn-slide__body {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.7;
+}
+
+.learn-slide__quiz {
+  margin-top: 1rem;
+}
+
+.learn-deck__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.learn-deck__dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.learn-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(79, 142, 247, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.learn-dot--active {
+  background: #4f8ef7;
+  box-shadow: 0 0 10px rgba(79, 142, 247, 0.7);
+}
+
+.learn-page__footer {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  gap: 0.4rem;
+}
+
+.diagram-card {
+  border-radius: 1rem;
+  border: 1px solid rgba(79, 142, 247, 0.25);
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+  min-width: 260px;
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.diagram-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: rgba(79, 142, 247, 0.8);
+}
+
+.diagram-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.diagram-chip {
+  border-radius: 0.75rem;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.8rem;
+  background: rgba(79, 142, 247, 0.12);
+  color: #dbeafe;
+}
+
+.diagram-pipeline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.diagram-node {
+  padding: 0.6rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.node-plain {
+  background: rgba(79, 142, 247, 0.15);
+  color: #dbeafe;
+}
+
+.node-process {
+  background: rgba(45, 212, 191, 0.16);
+  color: #a7f3d0;
+}
+
+.node-key {
+  background: rgba(255, 205, 102, 0.16);
+  color: #facc15;
+}
+
+.node-cipher {
+  background: rgba(34, 197, 94, 0.16);
+  color: #bbf7d0;
+}
+
+.diagram-arrow {
+  width: 20px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.4);
+  position: relative;
+}
+
+.diagram-arrow::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: -3px;
+  border-width: 4px 0 4px 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent rgba(255, 255, 255, 0.4);
+}
+
+.diagram-feistel {
+  display: grid;
+  gap: 0.6rem;
+  text-align: center;
+}
+
+.diagram-func {
+  border-radius: 1rem;
+  padding: 0.75rem;
+  background: rgba(15, 23, 42, 0.8);
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+.diagram-stack {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 240px;
+}
+
+.diagram-key-schedule {
+  display: grid;
+  gap: 0.5rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.diagram-sbox {
+  display: grid;
+  gap: 0.75rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.diagram-sbox-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.diagram-sbox-cell {
+  border-radius: 0.6rem;
+  padding: 0.4rem 0.6rem;
+  background: rgba(79, 142, 247, 0.15);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.diagram-alert {
+  border-radius: 1rem;
+  padding: 1rem;
+  background: rgba(239, 68, 68, 0.16);
+  display: grid;
+  gap: 0.6rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.diagram-alert__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(239, 68, 68, 0.3);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+}
+
+.diagram-alert__text {
+  font-size: 0.85rem;
+  color: #fecaca;
+  text-align: center;
+}
+
+.diagram-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.diagram-state {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.diagram-state__cell {
+  width: 40px;
+  height: 40px;
+  border-radius: 0.6rem;
+  display: grid;
+  place-items: center;
+  background: rgba(79, 142, 247, 0.12);
+  color: #dbeafe;
+  font-size: 0.8rem;
+  font-family: 'Space Mono', monospace;
+}
+
+.diagram-shiftrows {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.diagram-row {
+  border-radius: 0.6rem;
+  padding: 0.5rem 0.8rem;
+  background: rgba(45, 212, 191, 0.12);
+  color: #a7f3d0;
+  font-size: 0.75rem;
+}
+
+.diagram-columns {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.diagram-column {
+  border-radius: 0.6rem;
+  padding: 0.6rem 0.9rem;
+  background: rgba(255, 205, 102, 0.12);
+  font-size: 0.75rem;
+}
+
+.diagram-compare {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.diagram-compare__card {
+  border-radius: 1rem;
+  padding: 1rem;
+  background: rgba(15, 23, 42, 0.8);
+  color: #e2e8f0;
+}
+
+.diagram-compare__title {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: rgba(79, 142, 247, 0.8);
+}
+
+.quiz-card {
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.quiz-card__question {
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+  color: #e2e8f0;
+}
+
+.quiz-card__options {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.quiz-option {
+  border-radius: 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 0.7rem;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-option--selected {
+  border-color: rgba(79, 142, 247, 0.6);
+  color: #dbeafe;
+}
+
+.quiz-option--correct {
+  background: rgba(34, 197, 94, 0.18);
+  border-color: rgba(34, 197, 94, 0.6);
+  color: #bbf7d0;
+}
+
+.btn-primary,
+.btn-secondary {
+  border-radius: 999px;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: #4f8ef7;
+  border: none;
+  color: #0b0b16;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+/*
+ * AUDIT LOG — learn.css
+ * [WARN] Slide visuals are CSS-based; ensure container handles small screens -> NOTED.
+ */
+/*
+ * AUDIT LOG — learn.css
+ * [WARN] Slide visuals are CSS-based; ensure container handles small screens -> NOTED.
+ */
