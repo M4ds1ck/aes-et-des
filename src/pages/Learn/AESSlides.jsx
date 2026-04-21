@@ -4,6 +4,6 @@
  */
 import { getAESVisuals } from './AESVisuals';
 
-export function getAESSlides(trace, onJump) {
-  return getAESVisuals(trace, onJump);
+export function getAESSlides(trace, displayMode = 'hex') {
+  return getAESVisuals(trace, displayMode);
 }

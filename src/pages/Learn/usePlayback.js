@@ -2,6 +2,7 @@
  * AUDIT LOG - usePlayback.js
  * [BUG] Play stayed active on single-phase visuals -> FIXED (auto-stop when phases <= 1).
  * [BUG] Phase index could exceed new phase count -> FIXED (clamp on change).
+ * [BUG] Step controls needed for forward/back/replay -> FIXED (expose next/prev/replay).
  */
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -28,6 +29,19 @@ export function usePlayback(phases = 1) {
 
   const pause = useCallback(() => {
     setIsPlaying(false);
+  }, []);
+
+  const nextPhase = useCallback(() => {
+    setPhase((prev) => Math.min(prev + 1, Math.max(phases - 1, 0)));
+  }, [phases]);
+
+  const prevPhase = useCallback(() => {
+    setPhase((prev) => Math.max(prev - 1, 0));
+  }, []);
+
+  const replay = useCallback(() => {
+    setPhase(0);
+    setIsPlaying(true);
   }, []);
 
   useEffect(() => {
@@ -88,5 +102,8 @@ export function usePlayback(phases = 1) {
     play,
     pause,
     reset,
+    replay,
+    nextPhase,
+    prevPhase,
   };
 }

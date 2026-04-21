@@ -3,6 +3,7 @@
  * [BUG] Non-ASCII arrows and emoji rendered as garbled text -> FIXED (ASCII labels).
  */
 import BitString from './BitString';
+import HexString from './HexString';
 import LearnVisualFrame from './LearnVisualFrame';
 import PipelineMap from './PipelineMap';
 import StateMatrix from './StateMatrix';
@@ -19,7 +20,8 @@ const AES_STEPS = [
   { id: 'aes-map', label: 'Pipeline Map', tooltip: 'Full AES flow.' },
 ];
 
-function AESInputSetup({ trace, onJump }) {
+function AESInputSetup({ trace, onJump, displayMode }) {
+  const showHex = displayMode === 'hex';
   return (
     <LearnVisualFrame
       title="AES Input Setup & State Matrix"
@@ -31,8 +33,16 @@ function AESInputSetup({ trace, onJump }) {
         <div className="visual-stack">
           <PipelineMap title="AES Pipeline Map" steps={AES_STEPS} currentId="aes-input-setup" onJump={onJump} />
           <div className="visual-grid two-col">
-            <BitString bits={trace.input.plaintext128} group={8} color="blue" label="Plaintext (128 bits)" tooltip="Input plaintext bytes" />
-            <BitString bits={trace.input.keyBits} group={8} color="red" label="Key (128/192/256 bits)" tooltip="Key bytes" />
+            {showHex ? (
+              <HexString bytes={trace.input.plaintextBytes} group={4} label="Plaintext (16 bytes)" tooltip="Input plaintext bytes" color="blue" />
+            ) : (
+              <BitString bits={trace.input.plaintext128} group={8} color="blue" label="Plaintext (128 bits)" tooltip="Input plaintext bytes" />
+            )}
+            {showHex ? (
+              <HexString bytes={trace.input.keyBytes} group={4} label="Key (bytes)" tooltip="Key bytes" color="red" />
+            ) : (
+              <BitString bits={trace.input.keyBits} group={8} color="red" label="Key (128/192/256 bits)" tooltip="Key bytes" />
+            )}
           </div>
           <div className={`visual-grid two-col ${phase >= 1 ? 'active' : ''}`}>
             <StateMatrix bytes={trace.input.plaintextBytes} label="State Matrix" color="blue" tooltip="State matrix filled column by column" />
@@ -241,7 +251,8 @@ function AESAddRoundKey({ trace, onJump }) {
   );
 }
 
-function AESFinalOutput({ trace, onJump }) {
+function AESFinalOutput({ trace, onJump, displayMode }) {
+  const showHex = displayMode === 'hex';
   return (
     <LearnVisualFrame
       title="AES Final Output"
@@ -254,7 +265,11 @@ function AESFinalOutput({ trace, onJump }) {
           <PipelineMap title="AES Pipeline Map" steps={AES_STEPS} currentId="aes-final" onJump={onJump} />
           <div className="visual-grid two-col">
             <StateMatrix bytes={trace.encryption.ciphertextBytes} label="Final State" color="green" tooltip="Final state" />
-            <BitString bits={trace.encryption.ciphertextBits} group={8} color="green" label="Ciphertext (128 bits)" tooltip="Final ciphertext" />
+            {showHex ? (
+              <HexString bytes={trace.encryption.ciphertextBytes} group={4} label="Ciphertext (16 bytes)" tooltip="Final ciphertext" color="green" />
+            ) : (
+              <BitString bits={trace.encryption.ciphertextBits} group={8} color="green" label="Ciphertext (128 bits)" tooltip="Final ciphertext" />
+            )}
           </div>
           <div className="badge-lock">Encrypted!</div>
         </div>
@@ -293,13 +308,13 @@ function AESPipelineOverview({ onJump }) {
   );
 }
 
-export function getAESVisuals(trace) {
+export function getAESVisuals(trace, displayMode = 'hex') {
   return [
     {
       id: 'aes-input-setup',
       title: 'Input Setup & State Matrix',
       subtitle: 'Plaintext and key enter AES',
-      visual: ({ onJump }) => <AESInputSetup trace={trace} onJump={onJump} />,
+      visual: ({ onJump }) => <AESInputSetup trace={trace} onJump={onJump} displayMode={displayMode} />,
       body: 'AES loads 16 bytes into a 4x4 state matrix and aligns the key.',
     },
     {
@@ -348,7 +363,7 @@ export function getAESVisuals(trace) {
       id: 'aes-final',
       title: 'Final Output',
       subtitle: 'Ciphertext block',
-      visual: ({ onJump }) => <AESFinalOutput trace={trace} onJump={onJump} />,
+      visual: ({ onJump }) => <AESFinalOutput trace={trace} onJump={onJump} displayMode={displayMode} />,
       body: 'The final state is serialized to 16 ciphertext bytes.',
     },
     {

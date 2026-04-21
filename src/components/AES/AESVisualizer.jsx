@@ -1,11 +1,13 @@
 /*
- * AUDIT LOG — AESVisualizer.jsx
+ * AUDIT LOG - AESVisualizer.jsx
+ * [BUG] Step rendering could crash when step data was missing -> FIXED (guard + inline error boundary).
  * [WARN] Map labels still assume AES-128 in text; functional logic supports 192/256 -> NOTED.
  */
 import { motion } from 'framer-motion';
 import ByteMatrix from '../UI/ByteMatrix';
 import HexBinary from '../UI/HexBinary';
 import StepExplainer from '../UI/StepExplainer';
+import InlineErrorBoundary from '../UI/InlineErrorBoundary';
 
 const focusMap = {
   overview: { scale: 0.93, x: 0, y: 0, rotateX: 0, rotateY: 0 },
@@ -45,7 +47,7 @@ function Arrow({ label }) {
   return (
     <div className="grid place-items-center py-1">
       <div className="text-[9px] uppercase tracking-[0.18em] text-white/35">{label}</div>
-          <div className="text-cyber-amber">v</div>
+      <div className="text-cyber-amber">v</div>
     </div>
   );
 }
@@ -229,19 +231,29 @@ function AESMap({ steps, onGoToStep, focusKey }) {
 }
 
 export default function AESVisualizer({ step, steps, onGoToStep, isOverview = false }) {
+  if (!isOverview && !step) {
+    return (
+      <div className="panel rounded-3xl p-6 text-sm text-white/60">
+        AES steps are unavailable for the current inputs. Update the plaintext or key to regenerate the trace.
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
       <StepExplainer
-        title={isOverview ? 'AES Flow Overview' : step.title}
-        subtitle={isOverview ? 'Zoom map of AES-128 structure' : step.subtitle}
+        title={isOverview ? 'AES Flow Overview' : step?.title}
+        subtitle={isOverview ? 'Zoom map of AES-128 structure' : step?.subtitle}
         explanation={
           isOverview
             ? 'AES is shown as a zoomable map. Use Next and Back to move through the important regions: input, key expansion, round 0, round 1, round 2, background rounds, final round, and ciphertext.'
-            : step.explanation
+            : step?.explanation
         }
       />
-      <AESMap steps={steps} onGoToStep={onGoToStep} focusKey={isOverview ? 'overview' : step.focus} />
-      {!isOverview ? <StepDetails step={step} /> : null}
+      <InlineErrorBoundary resetKey={isOverview ? 'overview' : step?.id}>
+        <AESMap steps={steps} onGoToStep={onGoToStep} focusKey={isOverview ? 'overview' : step?.focus} />
+        {!isOverview && step ? <StepDetails step={step} /> : null}
+      </InlineErrorBoundary>
     </div>
   );
 }

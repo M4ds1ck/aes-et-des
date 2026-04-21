@@ -12,6 +12,7 @@ import DESVisualizer from '../../components/DESVisualizer';
 import { runPracticeCrypto } from '../../utils/cryptoPractice';
 import {
   bitsToHex,
+  bitsToString,
   hexToBits,
   hexToBitsWithLength,
   isLikelyHexBlock,
@@ -103,6 +104,7 @@ export default function PracticePage({
   const [showVisualizer, setShowVisualizer] = useState(false);
   const [copied, setCopied] = useState(false);
   const [suppressOutput, setSuppressOutput] = useState(false);
+  const [aesDisplayMode, setAesDisplayMode] = useState('hex');
 
   useEffect(() => {
     setSuppressOutput(true);
@@ -135,6 +137,7 @@ export default function PracticePage({
   const hasErrors = validation.length > 0 || Boolean(output?.error);
   const plaintextBits = previewBits(plaintext, algorithm);
   const keyBits = previewBits(keyValue, algorithm);
+  const formatBits = (bits) => (aesDisplayMode === 'binary' ? bitsToString(bits) : bitsToHex(bits));
 
   useEffect(() => {
     if (!hasSteps || hasErrors) {
@@ -189,6 +192,27 @@ export default function PracticePage({
               How does this work?
             </button>
           </div>
+          {isAES ? (
+            <div className="practice-row">
+              <div className="practice-label">Display</div>
+              <div className="practice-toggle">
+                <button
+                  type="button"
+                  className={`practice-toggle__btn ${aesDisplayMode === 'hex' ? 'active' : ''}`}
+                  onClick={() => setAesDisplayMode('hex')}
+                >
+                  Hex
+                </button>
+                <button
+                  type="button"
+                  className={`practice-toggle__btn ${aesDisplayMode === 'binary' ? 'active' : ''}`}
+                  onClick={() => setAesDisplayMode('binary')}
+                >
+                  Binary
+                </button>
+              </div>
+            </div>
+          ) : null}
 
           <div className="practice-row">
             <div className="practice-label">Mode</div>
@@ -284,7 +308,13 @@ export default function PracticePage({
               </button>
             </div>
             <div className="practice-output__box">
-              {suppressOutput ? 'Output cleared. Update input to recalculate.' : output?.hex || 'Output will appear here'}
+              {suppressOutput
+                ? 'Output cleared. Update input to recalculate.'
+                : isAES && aesDisplayMode === 'binary'
+                  ? output?.bits
+                    ? formatBits(output.bits)
+                    : 'Output will appear here'
+                  : output?.hex || 'Output will appear here'}
             </div>
             <div className="practice-output__sub">
               <span>ASCII:</span>
@@ -312,11 +342,15 @@ export default function PracticePage({
             <div className="practice-preview__row">
               <div>
                 <div className="practice-preview__title">Input Bits</div>
-                <div className="practice-preview__value">{plaintextBits.length ? bitsToHex(plaintextBits) : '--'}</div>
+                <div className="practice-preview__value">
+                  {plaintextBits.length ? (isAES ? formatBits(plaintextBits) : bitsToHex(plaintextBits)) : '--'}
+                </div>
               </div>
               <div>
                 <div className="practice-preview__title">Key Bits</div>
-                <div className="practice-preview__value">{keyBits.length ? bitsToHex(keyBits) : '--'}</div>
+                <div className="practice-preview__value">
+                  {keyBits.length ? (isAES ? formatBits(keyBits) : bitsToHex(keyBits)) : '--'}
+                </div>
               </div>
             </div>
           </div>

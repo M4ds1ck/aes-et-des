@@ -11,6 +11,7 @@ import PC2Permutation from './PC2Permutation';
 import SubkeyDisplay from './SubkeyDisplay';
 import HexBinary from '../UI/HexBinary';
 import StepExplainer from '../UI/StepExplainer';
+import InlineErrorBoundary from '../UI/InlineErrorBoundary';
 
 function StepContent({ step }) {
   if (!step?.data) return null;
@@ -45,7 +46,9 @@ export default function KeyGenerationVisualizer({ step, steps, onGoToStep }) {
           exit={{ opacity: 0, x: -30 }}
           transition={{ duration: 0.4, ease: 'easeInOut' }}
         >
-          <StepContent step={step} onGoToStep={onGoToStep} steps={steps} />
+          <InlineErrorBoundary resetKey={step.id}>
+            <StepContent step={step} onGoToStep={onGoToStep} steps={steps} />
+          </InlineErrorBoundary>
         </motion.div>
       </AnimatePresence>
     </div>

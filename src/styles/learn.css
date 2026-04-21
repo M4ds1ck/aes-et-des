@@ -46,6 +46,38 @@
   background: rgba(17, 24, 39, 0.6);
 }
 
+.learn-view-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(17, 24, 39, 0.5);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.learn-view-toggle__btn {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.learn-view-toggle__btn.active {
+  background: rgba(79, 142, 247, 0.25);
+  color: #4f8ef7;
+}
+
 .learn-tab {
   border: none;
   background: transparent;

@@ -22,7 +22,7 @@ export default function App() {
   const [bootstrapped, setBootstrapped] = useState(false);
   const [learnTrace, setLearnTrace] = useState(null);
 
-  const { steps, error } = useCipherSteps(algorithm, plaintext, key);
+  const { steps, error, pending } = useCipherSteps(algorithm, plaintext, key);
   const navigation = useStepNavigation(steps.length);
 
   const firstKeyStep = useMemo(() => steps.findIndex((step) => step.phase === 'keyGen'), [steps]);
@@ -39,7 +39,7 @@ export default function App() {
     }
     setViewMode('overview');
     navigation.goTo(0);
-  }, [algorithm, navigation]);
+  }, [algorithm, navigation.goTo]);
 
   useEffect(() => {
     const parseLocation = () => {
@@ -175,7 +175,7 @@ export default function App() {
           />
         ) : (
           <>
-            {error ? (
+            {error && !pending ? (
               <div className="mx-auto max-w-3xl rounded-3xl border border-cyber-red/40 bg-cyber-red/10 p-6 text-sm text-cyber-red">
                 {error}
               </div>

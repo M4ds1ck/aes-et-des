@@ -37,6 +37,7 @@ function validateTraceInput(plaintext, key, algorithm) {
 export default function LearnPage({ algorithm, setAlgorithm, initialSlideId, initialTrace }) {
   const [activeSlide, setActiveSlide] = useState(null);
   const [liveTrace, setLiveTrace] = useState(Boolean(initialTrace?.enabled));
+  const [aesDisplayMode, setAesDisplayMode] = useState('hex');
   const [plaintext, setPlaintext] = useState(
     initialTrace?.plaintext || (algorithm === 'aes' ? AES_PRESET.plaintext : DES_PRESET.plaintext),
   );
@@ -90,8 +91,8 @@ export default function LearnPage({ algorithm, setAlgorithm, initialSlideId, ini
   }, [algorithm, key, liveTrace, plaintext]);
 
   const slides = useMemo(() => {
-    return algorithm === 'aes' ? getAESSlides(trace) : getDESSlides(trace);
-  }, [algorithm, trace]);
+    return algorithm === 'aes' ? getAESSlides(trace, aesDisplayMode) : getDESSlides(trace);
+  }, [aesDisplayMode, algorithm, trace]);
 
   return (
     <div className="learn-page">
@@ -119,6 +120,25 @@ export default function LearnPage({ algorithm, setAlgorithm, initialSlideId, ini
             AES
           </button>
         </div>
+        {algorithm === 'aes' ? (
+          <div className="learn-view-toggle">
+            <span>Display</span>
+            <button
+              type="button"
+              className={`learn-view-toggle__btn ${aesDisplayMode === 'hex' ? 'active' : ''}`}
+              onClick={() => setAesDisplayMode('hex')}
+            >
+              Hex
+            </button>
+            <button
+              type="button"
+              className={`learn-view-toggle__btn ${aesDisplayMode === 'binary' ? 'active' : ''}`}
+              onClick={() => setAesDisplayMode('binary')}
+            >
+              Binary
+            </button>
+          </div>
+        ) : null}
       </div>
 
       <div className="live-trace">
@@ -162,6 +182,7 @@ export default function LearnPage({ algorithm, setAlgorithm, initialSlideId, ini
         initialSlideId={initialSlideId}
         onSlideChange={(slide) => setActiveSlide(slide)}
         trace={trace}
+        displayMode={algorithm === 'aes' ? aesDisplayMode : 'hex'}
       />
 
       {activeSlide ? (

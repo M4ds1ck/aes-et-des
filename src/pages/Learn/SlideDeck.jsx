@@ -7,7 +7,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-export default function SlideDeck({ slides = [], initialSlideId, onSlideChange, trace }) {
+export default function SlideDeck({ slides = [], initialSlideId, onSlideChange, trace, displayMode }) {
   const [index, setIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -94,7 +94,7 @@ export default function SlideDeck({ slides = [], initialSlideId, onSlideChange, 
           >
             <div className="learn-slide__visual">
               {typeof current.visual === 'function'
-                ? current.visual({ trace, onJump: goToId })
+                ? current.visual({ trace, onJump: goToId, displayMode })
                 : current.visual}
             </div>
             <p className="learn-slide__body">{current.body}</p>
